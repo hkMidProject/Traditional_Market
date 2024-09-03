@@ -6,19 +6,37 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+<<<<<<< Updated upstream
     "bootstrap": "^5.3.3",
+<<<<<<< HEAD
     "i": "^0.3.7",
     "morgan": "^1.10.0",
     "mysql2": "^3.11.0",
     "node-fetch": "^3.3.2",
     "i": "^0.3.7",
+=======
+=======
+    "leaflet": "^1.9.4",
+>>>>>>> Stashed changes
+>>>>>>> ft6066
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
+<<<<<<< Updated upstream
     "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
     "reactstrap": "^9.2.2",
+<<<<<<< HEAD
     "sequelize": "^6.37.3",
+=======
+=======
+    "react-leaflet": "^4.2.1",
+    "react-router-dom": "^6.26.1",
+    "react-scripts": "5.0.1",
+    "react-simple-maps": "^3.0.0",
+    "styled-components": "^6.1.13",
+>>>>>>> Stashed changes
+>>>>>>> ft6066
     "web-vitals": "^2.1.4"
   },
   "scripts": {
