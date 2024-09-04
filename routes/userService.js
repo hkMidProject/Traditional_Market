@@ -6,10 +6,28 @@ const { Users } = require('../models');
 router.post('/signIn', async (req, res) => {
     try {
         const { user_id, user_name, password, city } = req.body;
+        const idRegex = /^[a-zA-Z0-9]{5,10}$/; //5-10자리 영문자 숫자 섞인 아이디
+        const passRegex = /^[a-zA-Z0-9]{6,12}$/; //6-12자리 영문자 숫자 섞인 비밀번호
+        const nameRegex = /^[a-zA-Z가-힣]{2,}$/; //이름에 한글과 영문자만 가능하게
 
-        //이미 가입되어 있는 아이디인지 확인
         const existingUser = await Users.findOne( { where : { user_id }});
-
+        
+        //아이디 유효성 검사
+        if(!idRegex.test(user_id)) {
+            return res.status(400).json({ message : '아이디는 5~10자 길이의 영문자, 숫자만 가능합니다' });
+        }
+        
+        //비밀번호 유효성 검사
+        if(!passRegex.test(password)) {
+            return res.status(400).json({ message : '비밀번호는 6~12자 길이의 영문자 숫자만 가능합니다.' });
+        }
+        
+        //이름 유효성 검사
+        if(!nameRegex.test(user_name)) {
+            return res.status(400).json({ message : '이름은 두글자 이상의 한글과 영문자만 가능합니다.'});
+        }
+        
+        //이미 가입되어 있는 아이디인지 확인
         if (existingUser) {
             return res.status(409).json({ message : '이미 존재하는 id입니다 다른 id를 입력해주세요'});
         }
