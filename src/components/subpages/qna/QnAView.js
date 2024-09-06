@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Comments from './Comments';  // 댓글 컴포넌트 import
+// import Comments from './Comments';  // 댓글 컴포넌트 import
 import '../../../assets/CSS/notice-css/global.css';
 
 function QnAView() {
@@ -13,7 +13,7 @@ function QnAView() {
     useEffect(() => {
         const fetchQuestion = async () => {
             try {
-                const response = await axios.get(`/qna/view/${qna_num}`);
+                const response = await axios.get(`http://localhost:3010/qna/${qna_num}`);
                 setQuestion(response.data);
             } catch (error) {
                 console.error('Error fetching question:', error);
@@ -29,7 +29,7 @@ function QnAView() {
 
     const handleDelete = async () => {
         try {
-            const response = await axios.delete(`/qna/delete/${qna_num}`);
+            const response = await axios.delete(`http://localhost:3010/qna/delete/${qna_num}`);
             if (response.status === 200) {
                 navigate('/qna');
             } else {
@@ -55,7 +55,7 @@ function QnAView() {
             </div>
 
             {/* 댓글 컴포넌트를 별도로 불러옴 */}
-            <Comments qna_num={qna_num} />
+            {/* <Comments qna_num={qna_num} /> */}
 
             <div className="btn-wrap">
                 <Link to="/qna" className="btn-list">목록</Link>

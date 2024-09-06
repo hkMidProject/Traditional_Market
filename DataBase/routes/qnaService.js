@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Qna_board } = require('../models');
 const { Users } = require('../models');
+const { where } = require('sequelize');
 
 //QnA 게시판 글 작성 API
 router.post('/post', async (req, res) => {
@@ -105,6 +106,34 @@ router.delete('/delete/:qna_num', async (req, res) => {
         //서버 오류로 글 삭제가 안되었음을 알림.
         console.error('Error deleting qna: ', error);
         res.status(500).json({ error: '서버에 에러가 발생하였습니다. 잠시 후에 다시 시도해 주세요.' });
+    }
+});
+
+//Qna글 목록 불러오는 API
+router.get('/', async (_, res) => {
+    try {
+        const Qnas = await Qna_board.findAll();
+        res.status(200).json(Qnas);
+    } catch (error) {
+        console.error('Error fetching Qna Boards: ', error);
+        res.status(500).json({ error: '질문 게시판을 불러오는 중 오류가 발생했습니다.' });
+    }
+});
+
+//Qna상세 글 불러오는 API
+router.get('/:qna_num', async (req, res) => {
+    try {
+        const { qna_num } = req.params;
+        const Qna = await Qna_board.findOne( { where : { qna_num } });
+
+        if (!Qna) {
+            return res.status(404).json({ message : '해당 글을 찾을 수 없습니다.' });
+        }
+
+        res.status(200).json(Qna);
+    } catch (error) {
+        console.error('Error fetching Qna Board: ', error);
+        res.status(500).json({ error : '게시글을 불러오는 중 오류가 발생했습니다.' });
     }
 });
 

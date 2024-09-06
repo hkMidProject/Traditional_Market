@@ -10,7 +10,7 @@ function QnAList() {
     // 서버에서 QnA 목록을 불러오는 함수
     const fetchQuestions = async () => {
         try {
-            const response = await axios.get('/qna'); // QnA 목록을 가져오는 API 호출
+            const response = await axios.get('http://localhost:3010/qna'); // QnA 목록을 가져오는 API 호출
             setQuestions(response.data); // QnA 목록을 상태로 설정
         } catch (error) {
             console.error('Error fetching questions:', error);
